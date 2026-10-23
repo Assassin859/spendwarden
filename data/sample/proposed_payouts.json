@@ -1,0 +1,57 @@
+[
+  {
+    "id": "pay-helios",
+    "scenario": "A",
+    "recipient": "Helios Cloud",
+    "wallet": "0x1111111111111111111111111111111111111101",
+    "amountUsd": 2500,
+    "token": "USDC",
+    "category": "infrastructure",
+    "reason": "October hosting for Sample DAO",
+    "invoiceId": "INV-2026-1044"
+  },
+  {
+    "id": "pay-northline-dup",
+    "scenario": "B",
+    "recipient": "Northline Audit",
+    "wallet": "0x2222222222222222222222222222222222222202",
+    "amountUsd": 12000,
+    "token": "USDC",
+    "category": "audit",
+    "reason": "September audit invoice resubmitted",
+    "invoiceId": "INV-2026-0912"
+  },
+  {
+    "id": "pay-kite-new-wallet",
+    "scenario": "C",
+    "recipient": "Kite Supplies",
+    "wallet": "0x3333333333333333333333333333333333333399",
+    "amountUsd": 1800,
+    "token": "USDC",
+    "category": "operations",
+    "reason": "October supplies",
+    "invoiceId": "INV-2026-1102"
+  },
+  {
+    "id": "pay-orbit-over-cap",
+    "scenario": "D1",
+    "recipient": "Orbit Legal",
+    "wallet": "0x4444444444444444444444444444444444444404",
+    "amountUsd": 8000,
+    "token": "USDC",
+    "category": "legal",
+    "reason": "Q4 retainer",
+    "invoiceId": "INV-2026-1110"
+  },
+  {
+    "id": "pay-pylon-over-cap",
+    "scenario": "D2",
+    "recipient": "Pylon Design",
+    "wallet": "0x5555555555555555555555555555555555555505",
+    "amountUsd": 7500,
+    "token": "USDC",
+    "category": "design",
+    "reason": "Brand sprint",
+    "invoiceId": "INV-2026-1111"
+  }
+]

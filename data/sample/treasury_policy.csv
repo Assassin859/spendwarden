@@ -1,0 +1,6 @@
+category,per_tx_cap_usd,quarter_cap_usd,approved_vendors,required_approvals
+infrastructure,10000,40000,Helios Cloud,1
+audit,15000,30000,Northline Audit,2
+operations,5000,20000,Kite Supplies,1
+legal,5000,20000,Orbit Legal,2
+design,4000,15000,Pylon Design,1

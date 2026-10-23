@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+:root {
+  --background: #07080d;
+  --foreground: #f4f1ea;
+  --mist: #b7b1a6;
+  --gold: #e4c27a;
+  --teal: #7fd0c8;
+  --card: rgba(16, 18, 27, 0.78);
+  --line: rgba(244, 241, 234, 0.12);
+  --line-hot: rgba(228, 194, 122, 0.62);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-mist: var(--mist);
+  --color-gold: var(--gold);
+  --color-teal: var(--teal);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+.vault-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vault-light {
+  position: absolute;
+  width: 72vw;
+  height: 72vw;
+  border-radius: 999px;
+  filter: blur(48px);
+  opacity: 0.5;
+  animation: vault-drift 18s ease-in-out infinite alternate;
+}
+
+.vault-light-gold {
+  top: -24vw;
+  left: -16vw;
+  background: radial-gradient(circle, rgba(228, 194, 122, 0.42), transparent 68%);
+}
+
+.vault-light-teal {
+  right: -18vw;
+  bottom: -28vw;
+  background: radial-gradient(circle, rgba(127, 208, 200, 0.32), transparent 68%);
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
+}
+
+.ledger-grid {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(to right, rgba(244, 241, 234, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 241, 234, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 72%);
+  animation: ledger-pan 40s linear infinite;
+}
+
+.horizon-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(228, 194, 122, 0.85), transparent);
+  box-shadow: 0 0 18px rgba(228, 194, 122, 0.35);
+  animation: horizon-scan 9s ease-in-out infinite;
+}
+
+.vault-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(7, 8, 13, 0.72) 100%);
+}
+
+.rise-in {
+  animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fade-in {
+  animation: fade-in 800ms ease 420ms both;
+}
+
+.card-rise {
+  animation: card-rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.proposal-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.proposal-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-hot);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+@keyframes vault-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(6vw, 4vh, 0) scale(1.08);
+  }
+}
+
+@keyframes ledger-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 72px 72px;
+  }
+}
+
+@keyframes horizon-scan {
+  0% {
+    top: 10%;
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.9;
+  }
+  86% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vault-light,
+  .ledger-grid,
+  .horizon-scan,
+  .rise-in,
+  .fade-in,
+  .card-rise {
+    animation: none;
+  }
+
+  .horizon-scan {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .proposal-card,
+  .proposal-card:hover {
+    transform: none;
+    transition: none;
+  }
+}
