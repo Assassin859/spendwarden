@@ -3,19 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "build:sample": "tsx scripts/build-sample-payments.ts",
     "zetaris:check": "tsx scripts/zetaris-check.ts",
-    "test": "tsx --test src/rules/decide.test.ts src/memory/exception.test.ts"
+    "safe:setup": "tsx scripts/safe-setup.ts",
+    "safe:propose": "tsx scripts/safe-propose.ts",
+    "demo": "tsx scripts/demo.ts",
+    "test": "tsx --test src/rules/decide.test.ts src/memory/exception.test.ts src/nemotron/pipeline.test.ts src/safe/act.test.ts"
   },
   "dependencies": {
     "@dsnp/parquetjs": "^1.9.4",
+    "@safe-global/api-kit": "^5.0.4",
+    "@safe-global/protocol-kit": "^8.0.8",
     "next": "16.4.2",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "viem": "^2.57.10"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",

@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { LivingBackground } from "@/components/shell/living-background";
-import { ProposalQueue } from "@/components/shell/proposal-queue";
+import { TreasuryDesk } from "@/components/shell/treasury-desk";
 import { Wordmark } from "@/components/shell/wordmark";
 import type { PayoutProposal } from "@/domain/payout";
 
@@ -20,9 +20,9 @@ export default function Home() {
   return (
     <>
       <LivingBackground />
-      <main className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-start gap-12 px-6 py-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:py-24">
+      <main className="desk">
         <Wordmark />
-        <ProposalQueue proposals={proposals} />
+        <TreasuryDesk proposals={proposals} />
       </main>
     </>
   );

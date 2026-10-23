@@ -18,7 +18,7 @@ Do not put comments inside the CSV files. Zetaris will treat the first row as th
 
 ## Proposed payouts
 
-`proposed_payouts.json` is the intake queue, not payment history. No decision is made from these rows yet.
+`proposed_payouts.json` is the intake queue, not payment history. The app and `npm run demo` investigate these rows. The files themselves do not store a decision.
 
 - A `pay-helios`: known vendor, known wallet, 2500 USDC, under the infrastructure cap, new invoice.
 - B `pay-northline-dup`: invoice `INV-2026-0912` already appears in payment history.

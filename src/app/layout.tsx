@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Spendwarden",
-  description: "Sample treasury payout queue. Decisions are not implemented yet.",
+  description: "A treasury agent investigates sample payouts and proposes only what the rules approve.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

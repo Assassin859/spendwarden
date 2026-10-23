@@ -1,3 +1,5 @@
+"use client";
+
 import type { PayoutProposal } from "@/domain/payout";
 
 const amountFormat = new Intl.NumberFormat("en-US", {
@@ -5,42 +7,57 @@ const amountFormat = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
-export function ProposalQueue({ proposals }: { proposals: PayoutProposal[] }) {
+export function ProposalQueue({
+  proposals,
+  selectedId,
+  busyId,
+  decisions,
+  onSelect,
+}: {
+  proposals: PayoutProposal[];
+  selectedId: string | null;
+  busyId: string | null;
+  decisions: Record<string, string>;
+  onSelect: (id: string) => void;
+}) {
   return (
-    <section className="flex flex-col gap-4" aria-label="Payout queue">
-      <h2 className="fade-in text-xs font-medium tracking-[0.28em] text-mist uppercase">
-        Payout queue
-      </h2>
-      <ul className="flex flex-col gap-3">
-        {proposals.map((proposal, index) => (
-          <li
-            key={proposal.id}
-            className="proposal-card card-rise rounded-2xl px-5 py-4 backdrop-blur-md"
-            style={{ animationDelay: `${180 + index * 80}ms` }}
-          >
-            <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 className="text-lg font-medium">
-                <span className="mr-2 font-mono text-sm text-gold">{proposal.scenario}</span>
-                {proposal.recipient}
-              </h3>
-              <p className="font-mono text-sm text-gold">
-                {amountFormat.format(proposal.amountUsd)} {proposal.token}
-              </p>
-            </div>
-            <dl className="mt-3 grid gap-1 text-sm text-mist sm:grid-cols-2">
-              <div>
-                <dt className="inline">Category </dt>
-                <dd className="inline text-foreground">{proposal.category}</dd>
-              </div>
-              <div>
-                <dt className="inline">Invoice </dt>
-                <dd className="inline font-mono text-foreground">{proposal.invoiceId}</dd>
-              </div>
-            </dl>
-            <p className="mt-3 text-xs tracking-wide text-mist uppercase">Awaiting decision</p>
-          </li>
-        ))}
-      </ul>
+    <section aria-label="Payout queue">
+      <h2 className="eyebrow">Payout queue</h2>
+      {proposals.length === 0 ? (
+        <p className="stage-panel mt-3 text-sm text-mist">The queue is empty.</p>
+      ) : (
+        <ul className="queue-list">
+          {proposals.map((proposal, index) => {
+            const selected = selectedId === proposal.id;
+            const busy = busyId === proposal.id;
+            const decision = decisions[proposal.id];
+            const chip = busy ? "Reading" : (decision ?? "Open");
+            return (
+              <li key={proposal.id} className="card-rise" style={{ animationDelay: `${index * 70}ms` }}>
+                <button
+                  type="button"
+                  className={`queue-row ${selected ? "is-selected" : ""} ${busy ? "is-working" : ""}`}
+                  aria-pressed={selected}
+                  aria-busy={busy}
+                  onClick={() => onSelect(proposal.id)}
+                >
+                  <span className="queue-mark">{proposal.scenario}</span>
+                  <span className="min-w-0">
+                    <span className="queue-name">{proposal.recipient}</span>
+                    <span className="queue-meta">
+                      {proposal.category} · {proposal.invoiceId}
+                    </span>
+                  </span>
+                  <span>
+                    <span className="queue-amount">{amountFormat.format(proposal.amountUsd)} USDC</span>
+                    <span className={`status-chip ${decision ? `is-${decision.toLowerCase()}` : ""}`}>{chip}</span>
+                  </span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </section>
   );
 }
